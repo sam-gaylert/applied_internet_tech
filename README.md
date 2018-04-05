@@ -46,7 +46,7 @@ An Example Review with an Embedded Location and User:
 
 ```javascript
 {
-  location: // a location reference,
+  location: Coffee Place,
   user: // a reference to a user,
   rating: 5,
   review: "this place is great!"
