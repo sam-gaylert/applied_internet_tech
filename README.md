@@ -97,9 +97,11 @@ An Example Review with an Embedded Location and User:
     * Many resources for jQuery, so not too difficult and is not worth many points
 * (3 points) Google Maps API
     * Use Google Maps JavaScript API to implement some directional functionality and address validation
+    * Contain the scope of the project to NYC through address checking
     * Novel, but with many resources, I have assigned it 3 points
 * (4 points) react.js
     * Use react.js for client side rendering 
+    * create reusable layouts and better design
     * Novel and somewhat difficult, I have assigned it 4 points
 
 11 points total out of 8 required points 
@@ -109,7 +111,6 @@ An Example Review with an Embedded Location and User:
 
 ## Annotations / References Used
 
-1. [bcrypt.js authentication](https://www.npmjs.com/package/bcrypt) - (add link to source code that was based on this)
-2. [tutorial on React.js](https://reactjs.org/docs/hello-world.html) - (add link to source code that was based on this)
-3. [tutorial on Google Maps API (may vary depending on API research)](https://developers.google.com/maps/documentation/javascript/places) - (add link to source code that was based on this)
-
+1. [bcrypt.js authentication](https://www.npmjs.com/package/bcrypt)
+2. [tutorial on React.js](https://reactjs.org/docs/hello-world.html)
+3. [tutorial on Google Maps API (may vary depending on API research)](https://developers.google.com/maps/documentation/javascript/places)\
