@@ -1,0 +1,24 @@
+<form method="GET">
+	Semester:
+	<input type="text" name="semester">
+	Year:
+	<input type="text" name="year">
+	Professor:
+	<input type="text" name="professor">
+	<input type="submit" value="Submit">
+</form>
+<table>
+	<tr>
+		<th>Course Name</th>
+		<th>Course Number</th>
+		<th>Professor</th>
+	</tr>
+	{{#each rev as |r|}}
+	<tr>
+		<td>{{r.courseName}}</td>
+		<td>{{r.courseNumber}}</td>
+		<td>{{r.professor}}</td>
+	</tr>
+	{{/each}}
+</table>
+

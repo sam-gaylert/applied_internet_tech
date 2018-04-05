@@ -1,0 +1,10 @@
+td, th, tr, h1, h3, a, div, form{
+	color: grey;
+	font-family: arial;
+	text-align: center;
+}
+
+table{
+	margin-left:auto; 
+	margin-right:auto;
+}

@@ -1,53 +1,57 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
 
-(___TODO__: your project name_)
 
-# Shoppy Shoperson 
+# Judy Beans 
 
 ## Overview
 
 (___TODO__: a brief one or two paragraph, high-level description of your project_)
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
+For most New Yorkers, a good cup of coffee is the cornerstone of any morning routine; almost nobody forgoes their morning java. The city boasts some of the best coffee shops in the world, however it is also flooded with some not so great establishments, which makes finding that small corner espresso gem incredibly tedious. That's why I've come up with Judy Beans.
 
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+Judy Beans is a review site for New York coffee lovers by New York coffee lovers. Users of the site can search for coffee shops all over New York City that have been recommended by other avid coffee drinkers. Users that sign up can spread the word about their favorite places around the city and provide additional information and praise for other places the community has recommended. If a user wants to visit a shop that they read about in a review, they can find the location and address of the shop right there in that review.
 
 
 ## Data Model
 
 (___TODO__: a description of your application's data and their relationships to each other_) 
 
-The application will store Users, Lists and Items
+The application will store Users, and Locations 
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+* users have access to creating and editing reviews 
+* locations have an address, a name, and a list of reviews
+* reviews have a text body, a rating, a reference to a location, and a reference to a user
 
-(___TODO__: sample documents_)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+  username: "theCoffeeLover",
+  email: Coffee@beans.com,
+  hash: // a password hash
 }
 ```
 
-An Example List with Embedded Items:
+An Example Location with Embedded Reviews:
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+  address: 123 my street,
+  name: "Coffe Place",
+  reviews: [Review]
 }
 ```
 
+An Example Review with an Embedded Location and User:
+
+```javascript
+{
+  location: // a location reference,
+  user: // a reference to a user,
+  rating: 5,
+  review: "this place is great!"
+}
+```
 
 ## [Link to Commented First Draft Schema](db.js) 
 
@@ -57,17 +61,25 @@ An Example List with Embedded Items:
 
 (___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
 
-/list/create - page for creating a new shopping list
+/ - the home page that shows a list of reviews that can be sorted 
 
-![list create](documentation/list-create.png)
+![home page](documentation/homepage.jpg)
 
-/list - page for showing all shopping lists
+/login - users may login or register here
 
-![list](documentation/list.png)
+![login](documentation/login.jpg)
 
-/list/slug - page for showing specific shopping list
+/review/slug - an idividual review
 
-![list](documentation/list-slug.png)
+![review-slug](documentation/review-slug.jpg)
+
+/location/slug - an individual location with a series of reviews
+
+![location-slug](documentation/location-slug.jpg)
+
+/create - users who have logged in may create new reviews
+
+![create-review](documentation/create-review.jpg)
 
 ## Site map
 
@@ -77,31 +89,30 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
 
-1. as non-registered user, I can register a new account with the site
-2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+1. as a non-registered user, I can see reviews and locations on the site
+2. as a non-registered user, I can sign up
+3. as a user, I can log in to the site
+4. as a user, I can create a new review for a new location
+5. as a user, I can view all of the reviews I have made 
+6. as a user, I can add reviews to existing locations
 
 ## Research Topics
 
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+* (2 points) User authentication
+    * Use bcrypt for user authentication
+* (2 points) Perform client side form validation using jQuery
+    * Making sure user input is both safe and correct
+    * Many resources for jQuery, so not too difficult and is not worth many points
+* (3 points) Google Maps API
+    * Use Google Maps JavaScript API to implement some directional functionality and address validation
+    * Novel, but with many resources, I have assigned it 3 points
+* (4 points) react.js
+    * Use react.js for client side rendering 
+    * Novel and somewhat difficult, I have assigned it 4 points
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+11 points total out of 8 required points 
 
 
 ## [Link to Initial Main Project File](app.js) 
@@ -110,7 +121,7 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
+1. [bcrypt.js authentication](https://www.npmjs.com/package/bcrypt) - (add link to source code that was based on this)
+2. [tutorial on React.js](https://reactjs.org/docs/hello-world.html) - (add link to source code that was based on this)
+3. [tutorial on Google Maps API (may vary depending on API research)](https://developers.google.com/maps/documentation/javascript/places) - (add link to source code that was based on this)
 
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
