@@ -4,8 +4,6 @@
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
-
 For most New Yorkers, a good cup of coffee is the cornerstone of any morning routine; almost nobody forgoes their morning java. The city boasts some of the best coffee shops in the world, however it is also flooded with some not so great establishments, which makes finding that small corner espresso gem incredibly tedious. That's why I've come up with Judy Beans.
 
 Judy Beans is a review site for New York coffee lovers by New York coffee lovers. Users of the site can search for coffee shops all over New York City that have been recommended by other avid coffee drinkers. Users that sign up can spread the word about their favorite places around the city and provide additional information and praise for other places the community has recommended. If a user wants to visit a shop that they read about in a review, they can find the location and address of the shop right there in that review.
@@ -13,9 +11,7 @@ Judy Beans is a review site for New York coffee lovers by New York coffee lovers
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
-
-The application will store Users, and Locations 
+The application will store Users, Reviews, and Locations 
 
 * users have access to creating and editing reviews 
 * locations have an address, a name, and a list of reviews
@@ -53,9 +49,7 @@ An Example Review with an Embedded Location and User:
 }
 ```
 
-## [Link to Commented First Draft Schema](db.js) 
-
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
+## [Link to Commented First Draft Schema](src/db.js) 
 
 ## Wireframes
 
