@@ -37,7 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-	// now you can use {{user}} in your template!
 	if(req.user){
 		res.locals.path = "/review/write";
 		res.locals.username = req.user.username;
@@ -62,14 +61,19 @@ app.post('/register', (req, res) => {
 	const email = req.body.email;
 	User.register(new User({username: username, email:email}), req.body.password, function(err) {
 		if (err) {
-		  return next(err);
+			if(err.name === "UserExistsError"){
+				res.render('register',{message:"username already exists"});
+			}
 		}
-		passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login'})(req,res);
+		else{
+			passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login'})(req,res);
+		}
 	  });
 
 });
 
 app.get('/login', (req,res) => {
+
 	res.render('login');
 });
 
@@ -96,7 +100,28 @@ app.post('/review/write', (req, res) => {
 	}
 });
 
-app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login'}));
+app.post('/login', function(req, res, next) {
+	passport.authenticate('local', function(err, user, info) {
+		if (err) { 
+			console.log(err);
+			res.render('login',{message:'Error: ' + err.name});
+		}
+		if (!user) {
+			res.render('login',{message:'User does not exist'}); 
+		}
+		else if(user){
+			req.logIn(user, function(err) {
+				if (err) { 
+					res.render('login',{message:'Error: ' + err.name});
+				 }
+				 else{
+					res.redirect('/');
+				 }
+			});
+		}
+		
+	})(req, res, next);
+});
 
 
 
