@@ -90,8 +90,9 @@ An Example Review with an Embedded Location and User:
 ## Research Topics
 
 
-* (2 points) User authentication
-    * Use bcrypt for user authentication
+* (~~2~~3 points) User authentication
+    * ~~Use bcrypt for user authentication~~
+    * (UPDATE FOR MILESTONE 2) bcrypt was not inclusive enough to support all of the authentication I needed, so I used passport.js and some supporting libraries such as passport-local
 * (2 points) Perform client side form validation using jQuery
     * Making sure user input is both safe and correct
     * Many resources for jQuery, so not too difficult and is not worth many points
