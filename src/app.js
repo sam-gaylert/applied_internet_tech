@@ -1,6 +1,10 @@
 // app.js
 const express = require('express');
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const Filter = require('bad-words');
+const filter = new Filter();
 //boiler plate requires and variables
 const path = require('path');
 const publicPath = path.join(__dirname, '/public/');
@@ -52,9 +56,29 @@ app.set('view engine', 'hbs');
 /*
 	pathing
 */
+io.on('connection', (socket) => {
+	socket.emit('news', { hello: 'world' });
+    socket.on('bad-word', (data) => {
+		if(filter.isProfane(data.name)){
+			io.emit('check', {valid: false});
+		}
+		else{
+			io.emit('check', {valid: true});
+		}
+    });
+});
+
+app.get('/location/:location', (req, res) => {
+	res.render('location', {location: req.params.location});
+});
+
+
+
 app.get('/register', (req, res) => {
+	res.locals.source = 'register.js';
 	res.render('register');
 });
+
 
 app.post('/register', (req, res) => {
 	const username = req.body.username;
@@ -75,29 +99,6 @@ app.post('/register', (req, res) => {
 app.get('/login', (req,res) => {
 
 	res.render('login');
-});
-
-app.get('/review/write', (req, res) => {
-	res.render('write',{username: req.user.username});
-});
-
-app.post('/review/write', (req, res) => {
-	if(req.user){
-		const newReview = new Review({
-			location: req.body.location,
-			username: req.user.username,
-			rating: req.body.rating,
-			review: req.body.review
-		});
-		newReview.save(function(err){
-			if(err){ 
-				res.render('write', {message: 'REVIEW ADD ERROR'}); 
-			}
-			else{
-				res.redirect('/');
-			}
-        });
-	}
 });
 
 app.post('/login', function(req, res, next) {
@@ -123,6 +124,29 @@ app.post('/login', function(req, res, next) {
 	})(req, res, next);
 });
 
+app.get('/review/write', (req, res) => {
+	res.render('write',{username: req.user.username});
+});
+
+app.post('/review/write', (req, res) => {
+	if(req.user){
+		const newReview = new Review({
+			location: req.body.location,
+			username: req.user.username,
+			rating: req.body.rating,
+			review: req.body.review
+		});
+		newReview.save(function(err){
+			if(err){ 
+				res.render('write', {message: 'REVIEW ADD ERROR'}); 
+			}
+			else{
+				res.redirect('/');
+			}
+        });
+	}
+});
+
 
 
 app.get('/', (req, res)=> {
@@ -130,16 +154,20 @@ app.get('/', (req, res)=> {
 		if(err){
 			res.send(err);
 		}
-		if(req.user){
-			res.render('index',{rev: revs, message: req.user.username});
-		}
 		else{
-			res.render('index',{rev: revs});
+			
+			if(req.user){
+				res.render('index',{rev: revs, message: req.user.username});
+			}
+			else{
+				res.render('index',{rev: revs});
+			}
 		}
+		
 	});
 });
 
 
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);
 
 

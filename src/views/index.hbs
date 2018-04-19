@@ -1,12 +1,12 @@
 <h1 id="page-title">Reviews</h1>
 <form method="GET">
 	Location:
-	<input type="text" name="semester">
+	<input id='loc' type="text" name="semester">
 	User:
-	<input type="text" name="year">
+	<input id='user' type="text" name="year">
 	Rating:
-	<input type="number" name="year">
-	<input type="submit" value="Submit">
+	<input id='rating' type="number" name="year">
+	<input id='input' type="submit" value="Submit">
 </form>
 
 
@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each rev as |r|}}
+  {{#each rev as |r|}}
 	<tr>
 		<td scope="row">{{r.location}}</td>
 		<td>{{r.username}}</td>	
