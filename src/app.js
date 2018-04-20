@@ -133,10 +133,48 @@ app.post('/login', function(req, res, next) {
 	})(req, res, next);
 });
 
+
+
 app.get('/review/write', (req, res) => {
 	res.locals.source = '../write.js'; 
 	res.render('write',{username: req.user.username});
 });
+
+function addReview(review, locationName, address){
+	Location.findOne({name: locationName}, (err, loc) => {
+		if(err){
+			res.send(err);
+			return false;
+		}
+		else{
+			if(loc){
+				const newObj = {id:review._id, author:review.username, rate:review.rating, details: review.review};
+				loc.reviews.push(newObj);
+				loc.markModified('reviews');
+				loc.save(function(err){
+					if(err)console.log(err);
+					return
+				});
+			}
+			else{
+				const newLocation = new Location({
+					address: address,
+					name: locationName,
+					reviews: [{id:review._id, author:review.username, rate:review.rating, details: review.review}]
+				});
+				newLocation.save(function(err){
+					if(err){  
+
+						return err;
+					}
+					else{
+						return;
+					}
+				});
+			}
+		}
+	});
+}
 
 app.post('/review/write', (req, res) => {
 	if(req.user){
@@ -151,22 +189,12 @@ app.post('/review/write', (req, res) => {
 				res.render('write', {message: 'REVIEW ADD ERROR'}); 
 			}
 			else{
+				addReview(newReview, req.body.location, req.body.address);
 				res.redirect('/');
+				
 			}
 		});
-		Location.findOne({name: req.body.location}, (err, locs) => {
-			if(err){
-				res.send(err);
-			}
-			else{
-				if(locs.length){
-					
-				}
-				else{
-					//new location
-				}
-			}
-		});
+		
 	}
 });
 
@@ -179,16 +207,17 @@ app.get('/', (req, res)=> {
 	keys.forEach( key => queryObj[key] = req.query[key]);
 
 	Review.find(queryObj, (err, revs) => {
+		const reversed = revs.reverse();
 		if(err){
 			res.send(err);
 		}
 		else{
 			
 			if(req.user){
-				res.render('index',{rev: revs, message: req.user.username});
+				res.render('index',{rev: reversed, message: req.user.username});
 			}
 			else{
-				res.render('index',{rev: revs});
+				res.render('index',{rev: reversed});
 			}
 		}
 		

@@ -1,7 +1,6 @@
 const socket = io();
 
 $(document).ready(function(){
-    //$
     $('#username').keyup(function () {
         let name = $(this).val(); 
         socket.emit('bad-word', {name: name});

@@ -17,7 +17,7 @@ const revSchema = new mongoose.Schema({
 const locationSchema = new mongoose.Schema({
 	address: String,
 	name: String,
-	reviews: [revSchema]
+	reviews: [{id:String, author:String, rate:Number, details: String}]
 });
 
 mongoose.model('Review', revSchema);
