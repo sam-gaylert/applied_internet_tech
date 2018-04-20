@@ -1,11 +1,11 @@
 <h1 id="page-title">Reviews</h1>
 <form method="GET">
 	Location:
-	<input id='loc' type="text" name="semester">
+	<input id='location' type="text" name="location">
 	User:
-	<input id='user' type="text" name="year">
+	<input id='user' type="text" name="username">
 	Rating:
-	<input id='rating' type="number" name="year">
+	<input id='rating' type="number" name="rating">
 	<input id='input' type="submit" value="Submit">
 </form>
 
@@ -23,12 +23,15 @@
   </thead>
   <tbody>
   {{#each rev as |r|}}
-	<tr>
-		<td scope="row">{{r.location}}</td>
-		<td>{{r.username}}</td>	
-		<td>{{r.rating}}</td>	
-		<td>{{r.review}}</td>
+	<tr id={{@index}}>
+		<td id='locationElem' scope="row"><a href='/review/location/{{r._id}}'>{{r.location}}</a></td>
+		<td id='usernameElem'>{{r.username}}</td>	
+		<td id='ratingElem'>{{r.rating}}</td>	
+		<td id='reviewElem'>{{r.review}}</td>
 	</tr>
 	{{/each}}
   </tbody>
 </table>
+
+<script>
+</script>

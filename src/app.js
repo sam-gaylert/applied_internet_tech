@@ -57,7 +57,6 @@ app.set('view engine', 'hbs');
 	pathing
 */
 io.on('connection', (socket) => {
-	socket.emit('news', { hello: 'world' });
     socket.on('bad-word', (data) => {
 		if(filter.isProfane(data.name)){
 			io.emit('check', {valid: false});
@@ -68,9 +67,20 @@ io.on('connection', (socket) => {
     });
 });
 
-app.get('/location/:location', (req, res) => {
-	res.render('location', {location: req.params.location});
+app.get('/review/location/:id',(req,res) => {
+
+	Review.find({'_id':req.params.id}, (err, revs) => {
+		if(err){
+			res.send(err);
+		}
+		else{
+			res.render('location',{rev: revs});
+		}
+		
+	});
 });
+
+
 
 
 
@@ -81,7 +91,7 @@ app.get('/register', (req, res) => {
 
 
 app.post('/register', (req, res) => {
-	const username = req.body.username;
+	const username = req.body.username;     
 	const email = req.body.email;
 	User.register(new User({username: username, email:email}), req.body.password, function(err) {
 		if (err) {
@@ -97,7 +107,6 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/login', (req,res) => {
-
 	res.render('login');
 });
 
@@ -125,6 +134,7 @@ app.post('/login', function(req, res, next) {
 });
 
 app.get('/review/write', (req, res) => {
+	res.locals.source = '../write.js'; 
 	res.render('write',{username: req.user.username});
 });
 
@@ -143,14 +153,32 @@ app.post('/review/write', (req, res) => {
 			else{
 				res.redirect('/');
 			}
-        });
+		});
+		Location.findOne({name: req.body.location}, (err, locs) => {
+			if(err){
+				res.send(err);
+			}
+			else{
+				if(locs.length){
+					
+				}
+				else{
+					//new location
+				}
+			}
+		});
 	}
 });
 
 
-
 app.get('/', (req, res)=> {
-	Review.find((err, revs) => {
+	res.locals.source = 'index_js.js';
+
+	const queryObj = {};
+	const keys = Object.keys(req.query).filter( key => req.query[key] !== '');
+	keys.forEach( key => queryObj[key] = req.query[key]);
+
+	Review.find(queryObj, (err, revs) => {
 		if(err){
 			res.send(err);
 		}

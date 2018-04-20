@@ -25,9 +25,11 @@ $(document).ready(function(){
 
 socket.on('check', data => {
     if (!data.valid){
+        $('#messageReg').text('no profanity');
         $('#registerSubmit').prop("disabled",true);
     }
     else{
+        $('#messageReg').text('');
         $('#registerSubmit').prop("disabled",false);
     }
 });

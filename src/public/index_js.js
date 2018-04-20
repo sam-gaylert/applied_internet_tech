@@ -1,8 +1,6 @@
-
-
-function main(){
+$(document).ready(function(){
     
-}
+    console.log($('#1').html());
 
-document.addEventListener("DOMContentLoaded", main);
 
+});

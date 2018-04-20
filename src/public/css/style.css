@@ -10,11 +10,12 @@ td, th, span, tr, h1, h3, h2, div, form{
 	padding-right: 45%;
 }
 
+
 #rev-table{
 	padding-top: 400px;
 }
 
-#location, #review{
+#loc, #review{
 	padding-left: 30%;
 	padding-right: 30%;
 }
@@ -30,9 +31,4 @@ td, th, span, tr, h1, h3, h2, div, form{
 #page-title{
 	margin-top: 150px;
 }
-/*
-table{
-	margin-left:auto; 
-	margin-right:auto;
-}
-*/
+
