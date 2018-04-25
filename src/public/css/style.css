@@ -5,6 +5,24 @@ td, th, span, tr, h1, h3, h2, div, form{
 	text-align: center;
 }
 
+#filterForm{
+	padding-bottom: 25px;
+}
+
+h3{
+	padding-top: 200px;
+}
+
+#map {
+    height: 400px;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.col{
+	padding-bottom: 25px;
+}
+
 #submit{
 	padding-left: 45%;
 	padding-right: 45%;

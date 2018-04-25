@@ -68,8 +68,9 @@ io.on('connection', (socket) => {
 });
 
 app.get('/review/location/:id',(req,res) => {
+	res.locals.source = '../../location.js'; 
 
-	Review.find({'_id':req.params.id}, (err, revs) => {
+	Review.findOne({'_id':req.params.id}, (err, revs) => {
 		if(err){
 			res.send(err);
 		}
@@ -80,9 +81,25 @@ app.get('/review/location/:id',(req,res) => {
 	});
 });
 
+app.get('/location', (req, res) => {
+	const queryObj = {};
+	const keys = Object.keys(req.query).filter( key => req.query[key] !== '');
+	keys.forEach( key => queryObj[key] = req.query[key]);
 
 
-
+	console.log();
+	Location.findOne(queryObj, (err, locs) => {
+		if(err){
+			console.log('error');
+			res.send(err);
+		}
+		else{
+			console.log(locs);
+			res.send(locs);
+		}
+		
+	});
+});
 
 app.get('/register', (req, res) => {
 	res.locals.source = 'register.js';
@@ -164,7 +181,6 @@ function addReview(review, locationName, address){
 				});
 				newLocation.save(function(err){
 					if(err){  
-
 						return err;
 					}
 					else{
@@ -184,12 +200,20 @@ app.post('/review/write', (req, res) => {
 			rating: req.body.rating,
 			review: req.body.review
 		});
+
+		let address = '';
+		address += req.body.address1 + ',';
+		address += req.body.address2 + ',';
+		address += req.body.state;
+
+		console.log(address);
+
 		newReview.save(function(err){
 			if(err){ 
 				res.render('write', {message: 'REVIEW ADD ERROR'}); 
 			}
 			else{
-				addReview(newReview, req.body.location, req.body.address);
+				addReview(newReview, req.body.location, address);
 				res.redirect('/');
 				
 			}
@@ -198,6 +222,32 @@ app.post('/review/write', (req, res) => {
 	}
 });
 
+
+
+app.get('/revs', (req, res) => {
+	const queryObj = {};
+	const keys = Object.keys(req.query).filter( key => req.query[key] !== '');
+	keys.forEach( key => queryObj[key] = req.query[key]);
+
+	Review.find(queryObj, (err, revs) => {
+		const reversed = revs.reverse();
+		if(err){
+			res.send(err);
+		}
+		else{
+			
+			if(req.user){
+				//res.render('index',{rev: reversed, message: req.user.username});
+				res.send(reversed);
+			}
+			else{
+				//res.render('index',{rev: reversed});
+				res.send(reversed);
+			}
+		}
+		
+	});
+});
 
 app.get('/', (req, res)=> {
 	res.locals.source = 'index_js.js';

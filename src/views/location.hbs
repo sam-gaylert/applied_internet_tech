@@ -1,5 +1,8 @@
 
-{{#each rev as |r|}}
-<h1 style="padding-top: 400px">{{r.location}}</h1>
-
-{{/each}}
+<body>
+<h3 id='mapLoc'>{{{rev.location}}}</h3>
+<div id="map"></div>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSpXd5s1YcQWtPL3sFn6b8xyl-2ii_qbo&callback=initMap">
+</script>
+</body>

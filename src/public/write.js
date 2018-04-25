@@ -7,7 +7,16 @@ $(document).ready(function(){
     });
 });
 
+$('#reviewForm').submit(function(e){
 
+
+    const add1 = $('#add1').val();
+    if(!add1.match(/^\d+\s[A-z]+\s[A-z]+/g)){
+        $('#messageWrite').text('invalid address');
+        e.preventDefault();
+    }
+
+});
 
 socket.on('check', data => {
     if (!data.valid){

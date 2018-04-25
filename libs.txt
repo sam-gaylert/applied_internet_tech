@@ -1,0 +1,6 @@
+Bootstrap 
+Socket.io
+Bad-words
+jQuery 
+Google maps
+Passport 
