@@ -84,7 +84,7 @@ An Example Review with an Embedded Location and User:
 2. as a non-registered user, I can sign up
 3. as a user, I can log in to the site
 4. as a user, I can create a new review for a new location
-5. as a user, I can view all of the reviews I have made 
+~~5. as a user, I can view all of the reviews I have made ~~
 6. as a user, I can add reviews to existing locations
 
 ## Research Topics
@@ -100,18 +100,30 @@ An Example Review with an Embedded Location and User:
     * Use Google Maps JavaScript API to implement some directional functionality and address validation
     * Contain the scope of the project to NYC through address checking
     * Novel, but with many resources, I have assigned it 3 points
-* (4 points) react.js
-    * Use react.js for client side rendering 
-    * create reusable layouts and better design
-    * Novel and somewhat difficult, I have assigned it 4 points
+* ~~(4 points) react.js~~ DID NOT USE
+    * ~~Use react.js for client side rendering~~
+    * ~~create reusable layouts and better design~~
+    * ~~Novel and somewhat difficult, I have assigned it 4 points~~
+* (1 point) socket.io
+    * Used to check for profanity in real time
+    * Reviewed in class, I have assigned it 1 point
+* (2 points) Bootstrap 4
+    * Used to clean up front end
+    * Fairly simple with great documentation, I have awarded it 2 points
+* (2 points) bad-words
+    * Module used to check string input for profanity 
+    * Simple but novel, I have awarded it 2 points
 
-~~11~~ 12 points total out of 8 required points 
+~~11~~ 13 points total out of 8 required points 
 
 
 ## [Link to Initial Main Project File](src/app.js) 
 
 ## Annotations / References Used
 
-1. [bcrypt.js authentication](https://www.npmjs.com/package/bcrypt)
-2. [tutorial on React.js](https://reactjs.org/docs/hello-world.html)
-3. [tutorial on Google Maps API (may vary depending on API research)](https://developers.google.com/maps/documentation/javascript/places)\
+1. [bad-words github page](https://github.com/web-mech/badwords)
+2. [tutorial on Passport](http://www.passportjs.org/)
+3. [tutorial on Bootstrap](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+4. [tutorial on socket.io](https://socket.io/docs/)
+5. [tutorial on jQuery](http://api.jquery.com/)
+6. [tutorial on Google Maps API (may vary depending on API research)](https://developers.google.com/maps/documentation/javascript/places)\
