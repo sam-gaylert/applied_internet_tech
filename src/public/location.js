@@ -62,10 +62,13 @@ function tableFill(data){
         newEntry.setAttribute('id',data[i]._id);
         let newUser = document.createElement('td');
         newUser.setAttribute('id','userElem');
+        newUser.setAttribute('style',"width: 20%");
         let newRating = document.createElement('td');
         newRating.setAttribute('id','ratingElem');
+        newRating.setAttribute('style',"width: 10%");
         let newReview = document.createElement('td');
         newReview.setAttribute('id','reviewElem');
+        newReview.setAttribute('style',"width: 70%");
         newUser.innerText = (data[i].author);
         newRating.innerText = (data[i].rate);
         newReview.innerText = (data[i].details);

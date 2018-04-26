@@ -13,7 +13,7 @@
 
 
 
-<table id="rev-table" class="table">
+<table id="rev-table" align='center' class="table table-nonfluid">
   <thead>
     <tr>
       <th scope="col">Shop Name</th>
@@ -25,10 +25,10 @@
   <tbody>
   {{#each rev as |r|}}
 	<tr id={{@index}}>
-		<td id='locationElem' scope="row"><a href='/review/location/{{r._id}}'>{{r.location}}</a></td>
-		<td id='usernameElem'>{{r.username}}</td>	
-		<td id='ratingElem'>{{r.rating}}</td>	
-		<td id='reviewElem'>{{r.review}}</td>
+		<td style="width: 25%" id='locationElem' scope="row"><a href='/review/location/{{r._id}}'>{{r.location}}</a></td>
+		<td style="width: 25%" id='usernameElem'>{{r.username}}</td>	
+		<td style="width: 10%" id='ratingElem'>{{r.rating}}</td>	
+		<td style="width: 40%" id='reviewElem'>{{r.review}}</td>
 	</tr>
 	{{/each}}
   </tbody>

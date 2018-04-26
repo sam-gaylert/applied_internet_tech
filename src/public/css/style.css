@@ -5,6 +5,12 @@ td, th, span, tr, h1, h3, h2, h5, div, form{
 	text-align: center;
 }
 
+
+.table-nonfluid {
+	width: 75% !important;
+	max-width: 75%;
+ }
+
 h5{
 	padding-top: 50px;
 }
