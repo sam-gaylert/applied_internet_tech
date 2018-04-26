@@ -50,10 +50,7 @@ function updateMap(){
     req.send();
 }
 
-/*
-    data recieved from xmlrequest has list of reviews for particular shop, us table pop methods from index to list them.
 
-*/
 
 function tableFill(data){
     const table = document.querySelector('tbody');
@@ -79,8 +76,7 @@ function tableFill(data){
     }
 }
 
-function findLoc(name, func){ //CUSTOM CALLBACK 
-    //name: name
+function findLoc(name, func){ //custom hof
     const qString = '?name=' + name;
     const url = '/location' + qString;
     const req = new XMLHttpRequest();
