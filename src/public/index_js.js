@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    backgroundRequest('GET', '/revs', true);
+    //backgroundRequest('GET', '/revs', true);
 
     $("#input").click(function(e){
         e.preventDefault();

@@ -1,8 +1,16 @@
 
-td, th, span, tr, h1, h3, h2, div, form{
+td, th, span, tr, h1, h3, h2, h5, div, form{
 	color: grey;
 	font-family: arial;
 	text-align: center;
+}
+
+h5{
+	padding-top: 50px;
+}
+
+h1{
+	padding-top: 100px;
 }
 
 #filterForm{

@@ -2,10 +2,11 @@
 <h2 id='messageReg'>{{message}}</h2>
 <form  id='registerForm' method="POST">
 	Username:
-	<input id='username' type="text" name="username">
+	<input id='username' required="true" type="text" name="username">
 	Password:
-	<input id='password' type="password" name="password">
+	<input id='password' required="true" type="password" name="password">
     Email Address:
-	<input id='email' type="text" name="email">
+	<input id='email' required="true" type="text" name="email">
 	<input id='registerSubmit' type="submit" value="Submit">
 </form>
+<h5>passwords must be at least 8 characters long</h5>

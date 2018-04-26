@@ -67,6 +67,10 @@ io.on('connection', (socket) => {
     });
 });
 
+filter.removeWords('hells');
+filter.removeWords('hell');
+filter.removeWords('hello');
+
 app.get('/review/location/:id',(req,res) => {
 	res.locals.source = '../../location.js'; 
 
@@ -75,6 +79,7 @@ app.get('/review/location/:id',(req,res) => {
 			res.send(err);
 		}
 		else{
+			
 			res.render('location',{rev: revs});
 		}
 		
@@ -85,16 +90,11 @@ app.get('/location', (req, res) => {
 	const queryObj = {};
 	const keys = Object.keys(req.query).filter( key => req.query[key] !== '');
 	keys.forEach( key => queryObj[key] = req.query[key]);
-
-
-	console.log();
 	Location.findOne(queryObj, (err, locs) => {
 		if(err){
-			console.log('error');
 			res.send(err);
 		}
 		else{
-			console.log(locs);
 			res.send(locs);
 		}
 		
@@ -130,7 +130,6 @@ app.get('/login', (req,res) => {
 app.post('/login', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) { 
-			console.log(err);
 			res.render('login',{message:'Error: ' + err.name});
 		}
 		if (!user) {
@@ -170,6 +169,7 @@ function addReview(review, locationName, address){
 				loc.markModified('reviews');
 				loc.save(function(err){
 					if(err)console.log(err);
+
 					return
 				});
 			}
@@ -206,8 +206,6 @@ app.post('/review/write', (req, res) => {
 		address += req.body.address2 + ',';
 		address += req.body.state;
 
-		console.log(address);
-
 		newReview.save(function(err){
 			if(err){ 
 				res.render('write', {message: 'REVIEW ADD ERROR'}); 
@@ -237,11 +235,9 @@ app.get('/revs', (req, res) => {
 		else{
 			
 			if(req.user){
-				//res.render('index',{rev: reversed, message: req.user.username});
 				res.send(reversed);
 			}
 			else{
-				//res.render('index',{rev: reversed});
 				res.send(reversed);
 			}
 		}

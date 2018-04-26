@@ -1,7 +1,20 @@
 
 <body>
-<h3 id='mapLoc'>{{{rev.location}}}</h3>
+<h3 id='mapLoc'>{{rev.location}}</h3>
 <div id="map"></div>
+<div id='ifErr'></div>
+<h1 id="loc-revs">Reviews</h1>
+<table id="rev-table-loc" class="table">
+  <thead>
+    <tr>
+      <th scope="col">Author</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Review</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSpXd5s1YcQWtPL3sFn6b8xyl-2ii_qbo&callback=initMap">
 </script>

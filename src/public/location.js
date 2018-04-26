@@ -7,6 +7,8 @@ let urlTail = '&key=AIzaSyDm1Dn8Dbt7CXiTUx9OHywa31lujkWT-Ik';
 let testAddress = '';
 let lat = 0;
 let lng = 0;
+let revs =[];
+
 $(document).ready(function(){
     const name = $('#mapLoc').text();
     findLoc(name, updateMap);
@@ -28,18 +30,50 @@ function updateMap(){
             if(data.status === 'OK'){
                 lat = data.results[0].geometry.location.lat;
                 lng = data.results[0].geometry.location.lng;
-                console.log('OKAYYY');
                 initMap();
             }
-            console.log(data.status);
-            console.log(data.results[0].geometry.location.lat);
-            console.log(data.results[0].geometry.location.lng);
+            else{
+                let message = document.createElement('h1');
+                message.innerText = 'Map Error: ' + data.status;
+                $('#map').attr('hidden', 'true');
+                $('#ifErr').append(message);
+                tableFill(revs);
+            }
         }
     };
     req.onerror = function() { 
-        console.log('load error');
+        let message = document.createElement('h1');
+        message.innerText = 'Load Error';
+        $('#map').attr('hidden', 'true');
+        $('#ifErr').append(message);
     };
     req.send();
+}
+
+/*
+    data recieved from xmlrequest has list of reviews for particular shop, us table pop methods from index to list them.
+
+*/
+
+function tableFill(data){
+    const table = document.querySelector('tbody');
+    for(let i = 0; i < data.length; i++){
+        let newEntry = document.createElement('tr');
+        newEntry.setAttribute('id',data[i]._id);
+        let newUser = document.createElement('td');
+        newUser.setAttribute('id','userElem');
+        let newRating = document.createElement('td');
+        newRating.setAttribute('id','ratingElem');
+        let newReview = document.createElement('td');
+        newReview.setAttribute('id','reviewElem');
+        newUser.innerText = (data[i].author);
+        newRating.innerText = (data[i].rate);
+        newReview.innerText = (data[i].details);
+        newEntry.appendChild(newUser);
+        newEntry.appendChild(newRating);
+        newEntry.appendChild(newReview);
+        table.appendChild(newEntry);
+    }
 }
 
 function findLoc(name, func){ //CUSTOM CALLBACK 
@@ -51,14 +85,16 @@ function findLoc(name, func){ //CUSTOM CALLBACK
     req.onload = function() { 
         if (req.status >= 200 && req.status < 400) {
             data = JSON.parse(req.responseText);
-
-            console.log(data.address);
             testAddress = (addressString(data.address));
+            revs = data.reviews;
             func();
         }
     };
     req.onerror = function() { 
-        console.log('load error');
+        let message = document.createElement('h1');
+        message.innerText = 'Load Error';
+        $('#map').attr('hidden', 'true');
+        $('#ifErr').append(message);
     };
     req.send();
 
@@ -75,4 +111,5 @@ function initMap() {
         position: uluru,
         map: map
     });
+    tableFill(revs);
 }
