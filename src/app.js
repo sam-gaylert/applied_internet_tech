@@ -133,7 +133,7 @@ app.post('/login', function(req, res, next) {
 			res.render('login',{message:'Error: ' + err.name});
 		}
 		if (!user) {
-			res.render('login',{message:'User does not exist'}); 
+			res.render('login',{message:'Invalid username or password'}); 
 		}
 		else if(user){
 			req.logIn(user, function(err) {
